@@ -1,5 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+
 import Karta from './components/karta'
 import Input from './components/input'
 import Feedback from './components/feedback'
@@ -8,39 +10,56 @@ import SkipButton from './components/skipButton'
 
 import './index.scss'
 
+function pickRandom (fromArray) {
+  const index = Math.floor(Math.random() * fromArray.length)
+  return fromArray[index]
+}
+
 const MainView = React.createClass({
   getInitialState () {
     const countries = [
-      { name: 'Sverige', id: 'sverige' },
-      { name: 'Tyskland', id: 'tyskland' }
+      { name: 'Sverige', id: 'sweden' },
+      { name: 'Tyskland', id: 'germany' },
+      { name: 'Norge', id: 'norway' },
+      { name: 'Spanien', id: 'spain' },
+      { name: 'Frankrike', id: 'france' }
     ]
-    const country = countries[0]
+    const country = pickRandom(countries)
     const currentText = ''
     const showFeedback = false
-    const feedbackClass = 'feedback entering'
     const score = { score: 0, skipped: 0 }
-    return { country, countries, currentText, showFeedback, feedbackClass, score }
+    return { country, countries, currentText, showFeedback, score }
   },
 
   nextMap ({ didSkip }) {
-    const cssClass = didSkip ? 'feedback skipped' : 'feedback'
-    this.setState({ feedbackClass: cssClass + ' entering' })
-    this.setState({ showFeedback: true })
+    const isDone = (this.state.countries.length === 1)
 
-    setTimeout(() => {
-      this.setState({ feedbackClass: cssClass })
-    }, 0)
+    if (isDone) {
+      this.setState({
+        country: null,
+        countries: [],
+        showFeedback: true,
+        isDone: true
+      })
+    } else {
+      const country = this.state.country
+      const countries = this.state.countries
 
-    setTimeout(() => {
-      this.setState({ feedbackClass: 'exiting ' + cssClass })
+      const newCountries = countries.filter(c => c.id !== country.id)
+      const newCountry = pickRandom(newCountries)
+
+      this.setState({
+        country: newCountry,
+        countries: newCountries,
+        oldCountry: country,
+        didSkip: didSkip,
+        showFeedback: true
+      })
+
       setTimeout(() => {
         this.setState({ showFeedback: false })
-      }, 2000)
-    }, 2000)
-
-    const newIndex = Math.floor(Math.random() * this.state.countries.length)
-    const country = this.state.countries[newIndex]
-    this.setState({ country })
+      }, 3000)
+    }
   },
 
   handleOnChange (e) {
@@ -72,21 +91,45 @@ const MainView = React.createClass({
   },
 
   render () {
-    const currentCountry = this.state.country
     return (
-
       <div className='main'>
-      {this.state.showFeedback ? <Feedback cssClass={this.state.feedbackClass}/> : (
-        <div>
-          <Scorekeeper {...this.state.score}/>
-          <SkipButton clickCallback={this.skipMap} />
-          <Karta id={currentCountry.id} />
-          <Input text={this.state.currentText} onChange={this.handleOnChange}/>
-        </div>
-        )}
-
+        <ReactCSSTransitionGroup
+          transitionName='slider'
+          transitionEnterTimeout={300}
+          transitionLeaveTimeout={300}
+          transitionAppear
+          transitionAppearTimeout={500}>
+          {this.state.showFeedback
+            ? this.renderFeedback()
+            : this.renderCountry()}
+        </ReactCSSTransitionGroup>
       </div>
     )
+  },
+
+  renderFeedback () {
+    return (
+      <Feedback
+        key={'feedback' + this.state.oldCountry.id}
+        didSkip={this.state.didSkip}
+        isDone={this.state.isDone}
+        country={this.state.oldCountry}
+        score={this.state.score}
+      />
+    )
+  },
+
+  renderCountry () {
+    const currentCountry = this.state.country
+
+    return (
+     <div className='karta-wrapper' key={'country' + currentCountry.id}>
+       <Scorekeeper {...this.state.score}/>
+       <SkipButton clickCallback={this.skipMap} />
+       <Karta id={currentCountry.id} />
+       <Input text={this.state.currentText} onChange={this.handleOnChange}/>
+     </div>
+   )
   }
 })
 

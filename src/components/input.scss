@@ -3,9 +3,12 @@
   bottom: 0;
   right: 0;
   left: 0;
+
   & input {
-    width: 100%;
+    font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-size: 16px;
     padding: 5px;
     text-align: center;
+    width: 100%;
   }
 }

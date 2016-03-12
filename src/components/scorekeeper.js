@@ -1,7 +1,8 @@
 import React from 'react'
+import './scorekeeper.scss'
 
 export default function Scorekeeper ({ score, skipped }) {
   return (
-    <div>{score} av {score + skipped}</div>
+    <div className='scorekeeper'>{score} av {score + skipped}</div>
   )
 }

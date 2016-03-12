@@ -1,13 +1,42 @@
+@import './slider.scss';
+
+.karta-wrapper {
+  @extend .slider;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 .karta {
   background-repeat: no-repeat;
   background-position: center center;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
 
-  &.sverige {
-    background-image: url('./maps/sverige.gif');
+  &.sweden {
+    background-image: url('./maps/sweden.png');
   }
 
-  &.tyskland {
-    background-image: url('./maps/tyskland.jpg');
+  &.germany {
+    background-image: url('./maps/germany.png');
+  }
+
+  &.france {
+    background-image: url('./maps/france.png');
+  }
+
+  &.spain {
+    background-image: url('./maps/spain.png');
+  }
+
+  &.norway {
+    background-image: url('./maps/norway.png');
   }
 }

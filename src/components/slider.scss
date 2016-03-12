@@ -1,0 +1,18 @@
+.slider {
+  transition-duration: 1s;
+  transition-property: transform, opacity;
+  transition-timing-function: cubic-bezier(0, 0.7, 0.18, 1);
+
+  transform: translateX(0);
+  opacity: 1;
+
+  &.slider-enter {
+    opacity: 0.01;
+    transform: translateX(100%);
+  }
+
+  &.slider-leave {
+    opacity: 0.01;
+    transform: translateX(-100%);
+  }
+}
