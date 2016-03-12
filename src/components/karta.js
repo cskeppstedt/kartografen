@@ -3,9 +3,7 @@ import './karta.scss'
 
 export default function Karta ({ id }) {
   return (
-    <div className={'karta ' + id}>
-    
-    </div>
+    <div className={'karta ' + id}></div>
   )
 }
 
