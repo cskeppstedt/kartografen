@@ -1,0 +1,13 @@
+.karta {
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 100%;
+
+  &.sverige {
+    background-image: url('./maps/sverige.gif');
+  }
+
+  &.tyskland {
+    background-image: url('./maps/tyskland.jpg');
+  }
+}

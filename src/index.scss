@@ -1,0 +1,16 @@
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: transparent; /* For some Androids */
+  box-sizing: border-box;
+}
+
+html,body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font-size: 16px;
+}
