@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Karta from './components/karta'
+import Input from './components/input'
 import './index.scss'
 
 const MainView = React.createClass({
@@ -10,23 +11,38 @@ const MainView = React.createClass({
       { name: 'Tyskland', id: 'tyskland' }
     ]
     const country = countries[0]
-    return { country, countries }
+    const currentText = ''
+    const showFeedback = false
+    return { country, countries, currentText, showFeedback }
   },
 
-  handleClick () {
+  nextMap () {
     const newIndex = Math.floor(Math.random() * this.state.countries.length)
     const country = this.state.countries[newIndex]
     this.setState({ country })
   },
 
+  handleOnChange (e) {
+    const newText = e.target.value
+    const currentCountry = this.state.country
+
+    this.setState({currentText: newText})
+
+    if (newText === currentCountry.name) {
+      this.setState({currentText: ''})
+      this.nextMap()
+    }
+  },
+
   render () {
     const currentCountry = this.state.country
     return (
-      <div onClick={this.handleClick}>
+      <div>
         <Karta
-          text={'test: ' + currentCountry.name}
+          text={this.state.currentText + ' ' + currentCountry.name}
           id={currentCountry.id}
         />
+        <Input text={this.state.currentText} onChange={this.handleOnChange}/>
       </div>
     )
   }
