@@ -1,10 +1,10 @@
 import React from 'react'
 import './karta.scss'
 
-export default function Karta ({ text, id }) {
+export default function Karta ({ id }) {
   return (
     <div className={'karta ' + id}>
-      {text}
+    
     </div>
   )
 }
