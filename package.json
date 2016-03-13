@@ -4,10 +4,10 @@
   "description": "Let's make a react",
   "main": "index.js",
   "scripts": {
-    "test": "npm run sagui:test",
+    "test": "sagui test",
     "test-watch": "sagui test --watch",
     "dist": "sagui dist",
-    "start": "npm run sagui:develop",
+    "start": "sagui develop",
     "deploy": "rm -r dist/ && npm run dist && firebase deploy"
   },
   "repository": {
