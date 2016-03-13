@@ -5,12 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run sagui:test",
-    "sagui:test": "sagui test",
-    "sagui:test-watch": "sagui test --watch",
-    "sagui:develop": "sagui develop",
-    "sagui:build": "sagui build",
-    "sagui:dist": "sagui dist",
-    "start": "npm run sagui:develop"
+    "test-watch": "sagui test --watch",
+    "dist": "sagui dist",
+    "start": "npm run sagui:develop",
+    "deploy": "rm -r dist/ && npm run dist && firebase deploy"
   },
   "repository": {
     "type": "git",
