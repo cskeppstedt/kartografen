@@ -5,7 +5,7 @@ export default function Autocomplete ({text, values}) {
   let matched = matchedValues(text, values)
   let styling = ''
 
-  if (text === '' && matched.length > 0) {
+  if (shouldBeHidden(text, matched)) {
     styling = 'hidden'
   }
 
@@ -23,4 +23,8 @@ export default function Autocomplete ({text, values}) {
 
 function matchedValues (text, values) {
   return values.filter(c => c.name.startsWith(text))
+}
+
+function shouldBeHidden (text, matchedValues) {
+  return text === '' && matchedValues.length > 0
 }
