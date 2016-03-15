@@ -22,7 +22,14 @@ module.exports = {
    * Will ovewrite and extend the default Sagui configuration
    */
   webpackConfig: {
-
+    module: {
+      loaders: [
+        {
+          test: /\.(png|jpg|gif|svg)$/,
+          loader: 'url-loader?limit=8192&name=[name]-[hash].[ext]'
+        }
+      ]
+    }
   },
 
   /**
