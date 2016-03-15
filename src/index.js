@@ -63,8 +63,7 @@ const MainView = React.createClass({
     }
   },
 
-  handleOnChange (e) {
-    const newText = e.target.value
+  changeMapIfTextIsCorrect (newText) {
     const currentCountry = this.state.country
     const score = this.state.score.score + 1
     const skipped = this.state.score.skipped
@@ -79,6 +78,16 @@ const MainView = React.createClass({
 
       this.nextMap({ didSkip: false })
     }
+  },
+
+  handleOnChange (e) {
+    const newText = e.target.value
+    this.changeMapIfTextIsCorrect(newText)
+  },
+
+  handleOnClick (e) {
+    const newText = e.target.textContent
+    this.changeMapIfTextIsCorrect(newText)
   },
 
   skipMap () {
@@ -130,7 +139,7 @@ const MainView = React.createClass({
          <SkipButton clickCallback={this.skipMap} />
        </div>
        <Karta id={currentCountry.id} />
-       <Autocomplete text={this.state.currentText} values={this.state.countries} />
+       <Autocomplete text={this.state.currentText} values={this.state.countries} onClick={this.handleOnClick} />
        <Input text={this.state.currentText} onChange={this.handleOnChange}/>
      </div>
    )

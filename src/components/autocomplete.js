@@ -1,7 +1,7 @@
 import React from 'react'
 import './autocomplete.scss'
 
-export default function Autocomplete ({text, values}) {
+export default function Autocomplete ({text, values, onClick}) {
   let matched = matchedValues(text, values)
   let styling = ''
 
@@ -13,7 +13,7 @@ export default function Autocomplete ({text, values}) {
     <div className={'autocomplete ' + styling}>
       <ul>
         { matched.map(function (value, index) {
-          return <li key={index}>{value.name}</li>
+          return <li key={index} onClick={onClick}>{value.name}</li>
         })
         }
       </ul>
