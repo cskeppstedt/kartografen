@@ -7,6 +7,7 @@ import Input from './components/input'
 import Feedback from './components/feedback'
 import Scorekeeper from './components/scorekeeper'
 import SkipButton from './components/skipButton'
+import Autocomplete from './components/autocomplete'
 
 import './index.scss'
 
@@ -124,9 +125,12 @@ const MainView = React.createClass({
 
     return (
      <div className='karta-wrapper' key={'country' + currentCountry.id}>
-       <Scorekeeper {...this.state.score}/>
-       <SkipButton clickCallback={this.skipMap} />
+       <div className='score-wrapper'>
+         <Scorekeeper {...this.state.score}/>
+         <SkipButton clickCallback={this.skipMap} />
+       </div>
        <Karta id={currentCountry.id} />
+       <Autocomplete text={this.state.currentText} values={this.state.countries} />
        <Input text={this.state.currentText} onChange={this.handleOnChange}/>
      </div>
    )
