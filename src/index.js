@@ -45,7 +45,7 @@ const MainView = React.createClass({
       const country = this.state.country
       const countries = this.state.countries
 
-      const newCountries = countries.filter(c => c.id !== country.id)
+      const newCountries = countries.filter((c) => c.id !== country.id)
       const newCountry = pickRandom(newCountries)
 
       this.setState({
@@ -123,12 +123,12 @@ const MainView = React.createClass({
     const currentCountry = this.state.country
 
     return (
-     <div className='karta-wrapper' key={'country' + currentCountry.id}>
-       <Scorekeeper {...this.state.score}/>
-       <SkipButton clickCallback={this.skipMap} />
-       <Karta id={currentCountry.id} />
-       <Input text={this.state.currentText} onChange={this.handleOnChange}/>
-     </div>
+      <div className='karta-wrapper' key={'country' + currentCountry.id}>
+        <Scorekeeper {...this.state.score}/>
+        <SkipButton clickCallback={this.skipMap} />
+        <Karta id={currentCountry.id} />
+        <Input text={this.state.currentText} onChange={this.handleOnChange}/>
+      </div>
    )
   }
 })
