@@ -9,6 +9,8 @@ import Scorekeeper from './components/scorekeeper'
 import SkipButton from './components/skipButton'
 import Autocomplete from './components/autocomplete'
 
+import countriesConfig from './config/countries.json'
+
 import './index.scss'
 
 function pickRandom (fromArray) {
@@ -18,13 +20,7 @@ function pickRandom (fromArray) {
 
 const MainView = React.createClass({
   getInitialState () {
-    const countries = [
-      { name: 'Sverige', id: 'sweden', viewBox: '285 50 40 90' },
-      { name: 'Tyskland', id: 'germany', viewBox: '280 85 30 90' },
-      { name: 'Norge', id: 'norway', viewBox: '282 50 40 90' },
-      { name: 'Spanien', id: 'spain', viewBox: '260 105 30 90' },
-      { name: 'Frankrike', id: 'france', viewBox: '270 95 30 90' }
-    ]
+    const countries = countriesConfig.countries
     const country = pickRandom(countries)
     const currentText = ''
     const showFeedback = false
