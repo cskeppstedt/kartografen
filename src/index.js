@@ -19,11 +19,11 @@ function pickRandom (fromArray) {
 const MainView = React.createClass({
   getInitialState () {
     const countries = [
-      { name: 'Sverige', id: 'sweden' },
-      { name: 'Tyskland', id: 'germany' },
-      { name: 'Norge', id: 'norway' },
-      { name: 'Spanien', id: 'spain' },
-      { name: 'Frankrike', id: 'france' }
+      { name: 'Sverige', id: 'sweden', viewBox: '285 50 40 90' },
+      { name: 'Tyskland', id: 'germany', viewBox: '280 85 30 90' },
+      { name: 'Norge', id: 'norway', viewBox: '282 50 40 90' },
+      { name: 'Spanien', id: 'spain', viewBox: '260 105 30 90' },
+      { name: 'Frankrike', id: 'france', viewBox: '270 95 30 90' }
     ]
     const country = pickRandom(countries)
     const currentText = ''
@@ -133,16 +133,16 @@ const MainView = React.createClass({
     const currentCountry = this.state.country
 
     return (
-     <div className='karta-wrapper' key={'country' + currentCountry.id}>
-       <div className='score-wrapper'>
-         <Scorekeeper {...this.state.score}/>
-         <SkipButton clickCallback={this.skipMap} />
-       </div>
-       <Karta id={currentCountry.id} />
-       <Autocomplete text={this.state.currentText} values={this.state.countries} onClick={this.handleOnClick} />
-       <Input text={this.state.currentText} onChange={this.handleOnChange}/>
-     </div>
-   )
+      <div className='karta-wrapper' key={'country' + currentCountry.id}>
+        <div className='score-wrapper'>
+          <Scorekeeper {...this.state.score}/>
+          <SkipButton clickCallback={this.skipMap} />
+        </div>
+        <Karta country={currentCountry} />
+        <Autocomplete text={this.state.currentText} values={this.state.countries} onClick={this.handleOnClick} />
+        <Input text={this.state.currentText} onChange={this.handleOnChange}/>
+      </div>
+    )
   }
 })
 
