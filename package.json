@@ -10,7 +10,12 @@
     "develop": "sagui develop",
     "build": "sagui build",
     "dist": "sagui dist",
-    "deploy": "rm -rf dist/ && npm run dist && firebase deploy"
+    "deploy": "rm -rf dist/ && npm run dist && firebase deploy",
+    "sagui:test": "sagui test",
+    "sagui:test-watch": "sagui test --watch",
+    "sagui:develop": "sagui develop",
+    "sagui:build": "sagui build",
+    "sagui:dist": "sagui dist"
   },
   "repository": {
     "type": "git",
@@ -24,9 +29,11 @@
   },
   "homepage": "https://github.com/cskeppstedt/kartografen#readme",
   "dependencies": {
-    "react": "^15.0.0-rc.2",
-    "react-addons-css-transition-group": "^15.0.0-rc.2",
-    "react-dom": "^15.0.0-rc.2",
-    "sagui": "4.0.3"
+    "enzyme": "2.0.0",
+    "react": "0.14.7",
+    "react-dom": "0.14.7",
+    "react-addons-css-transition-group": "0.14.7",
+    "react-addons-test-utils": "0.14.7",
+    "sagui": "https://github.com/pirelenito/sagui.git#v4.0.0-rc.1"
   }
 }
