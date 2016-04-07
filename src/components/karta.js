@@ -1,6 +1,5 @@
 import React from 'react'
 import './karta.scss'
-import svg from './maps/vector-map-optimized.svg'
 
 const OPACITY_ACTIVE = '1.0'
 const OPACITY_INACTIVE = '0.25'
