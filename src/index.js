@@ -46,7 +46,7 @@ const MainView = React.createClass({
       const country = this.state.country
       const countries = this.state.countries
 
-      const newCountries = countries.filter(c => c.id !== country.id)
+      const newCountries = countries.filter((c) => c.id !== country.id)
       const newCountry = pickRandom(newCountries)
 
       this.setState({
