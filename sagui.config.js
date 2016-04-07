@@ -36,6 +36,10 @@ module.exports = {
           ],
           // The optional[]=jscript is required if we want to support IE8, https://github.com/babel/babel/pull/1382
           loader: 'babel?optional[]=jscript&stage=0&loose=all'
+        },
+        {
+          test: /\.(png|jpg|gif|svg)$/,
+          loader: 'url-loader?limit=8192&name=[name]-[hash].[ext]'
         }
       ]
     },

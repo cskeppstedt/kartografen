@@ -1,0 +1,9 @@
+{
+  "countries": [
+    { "name": "Sverige", "id": "sweden", "viewBox": "285 50 40 90" },
+    { "name": "Tyskland", "id": "germany", "viewBox": "280 85 30 90" },
+    { "name": "Norge", "id": "norway", "viewBox": "282 50 40 90" },
+    { "name": "Spanien", "id": "spain", "viewBox": "260 105 30 90" },
+    { "name": "Frankrike", "id": "france", "viewBox": "270 95 30 90" }
+  ]
+}

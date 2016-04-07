@@ -5,37 +5,28 @@
 
   display: flex;
   flex-direction: column;
-
-  width: 100%;
   height: 100%;
+  margin: 0 auto;
+  max-width: 320px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.svg-element {
+}
+
+.svg-container {
+  height: 100%;
+  width: 100%;
 }
 
 .karta {
-  background-repeat: no-repeat;
-  background-position: center center;
-
   width: 100%;
   height: 100%;
 
-  &.sweden {
-    background-image: url('./maps/sweden.png');
-  }
-
-  &.germany {
-    background-image: url('./maps/germany.png');
-  }
-
-  &.france {
-    background-image: url('./maps/france.png');
-  }
-
-  &.spain {
-    background-image: url('./maps/spain.png');
-  }
-
-  &.norway {
-    background-image: url('./maps/norway.png');
-  }
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 }
 
 .score-wrapper {
