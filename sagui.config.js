@@ -22,13 +22,34 @@ module.exports = {
    * Will ovewrite and extend the default Sagui configuration
    */
   webpackConfig: {
+    babel: {
+      optional: ['runtime', 'jscript'],
+      stage: 0,
+      loose: 'all'
+    },
     module: {
       loaders: [
+        {
+          test: /\.jsx?$/,
+          exclude: [
+            /node_modules\/.*/i
+          ],
+          // The optional[]=jscript is required if we want to support IE8, https://github.com/babel/babel/pull/1382
+          loader: 'babel?optional[]=jscript&stage=0&loose=all'
+        },
         {
           test: /\.(png|jpg|gif|svg)$/,
           loader: 'url-loader?limit=8192&name=[name]-[hash].[ext]'
         }
       ]
+    },
+    resolve: {
+      extensions: ['', '.js', '.jsx', '.json']
+    },
+    externals: {
+      // https://github.com/airbnb/enzyme/blob/master/docs/guides/karma.md
+      'react/lib/ExecutionEnvironment': true,
+      'react/lib/ReactContext': true
     }
   },
 
@@ -38,7 +59,5 @@ module.exports = {
    *
    * Will overwrite and extend the default Sagui configuration
    */
-  karmaConfig: {
-
-  }
+  karmaConfig: undefined
 }
