@@ -3,9 +3,9 @@
 .karta-wrapper {
   @extend .slider;
 
-  position: absolute;
-  top: 0;
-  left: 0;
+  display: flex;
+  flex-direction: column;
+
   width: 100%;
   height: 100%;
 }
@@ -14,9 +14,6 @@
   background-repeat: no-repeat;
   background-position: center center;
 
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
 
@@ -39,4 +36,10 @@
   &.norway {
     background-image: url('./maps/norway.png');
   }
+}
+
+.score-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 }

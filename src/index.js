@@ -7,6 +7,7 @@ import Input from './components/input'
 import Feedback from './components/feedback'
 import Scorekeeper from './components/scorekeeper'
 import SkipButton from './components/skipButton'
+import Autocomplete from './components/autocomplete'
 
 import './index.scss'
 
@@ -62,8 +63,7 @@ const MainView = React.createClass({
     }
   },
 
-  handleOnChange (e) {
-    const newText = e.target.value
+  changeMapIfTextIsCorrect (newText) {
     const currentCountry = this.state.country
     const score = this.state.score.score + 1
     const skipped = this.state.score.skipped
@@ -78,6 +78,16 @@ const MainView = React.createClass({
 
       this.nextMap({ didSkip: false })
     }
+  },
+
+  handleOnChange (e) {
+    const newText = e.target.value
+    this.changeMapIfTextIsCorrect(newText)
+  },
+
+  handleOnClick (e) {
+    const newText = e.target.textContent
+    this.changeMapIfTextIsCorrect(newText)
   },
 
   skipMap () {
@@ -123,12 +133,15 @@ const MainView = React.createClass({
     const currentCountry = this.state.country
 
     return (
-      <div className='karta-wrapper' key={'country' + currentCountry.id}>
-        <Scorekeeper {...this.state.score}/>
-        <SkipButton clickCallback={this.skipMap} />
-        <Karta id={currentCountry.id} />
-        <Input text={this.state.currentText} onChange={this.handleOnChange}/>
-      </div>
+     <div className='karta-wrapper' key={'country' + currentCountry.id}>
+       <div className='score-wrapper'>
+         <Scorekeeper {...this.state.score}/>
+         <SkipButton clickCallback={this.skipMap} />
+       </div>
+       <Karta id={currentCountry.id} />
+       <Autocomplete text={this.state.currentText} values={this.state.countries} onClick={this.handleOnClick} />
+       <Input text={this.state.currentText} onChange={this.handleOnChange}/>
+     </div>
    )
   }
 })
