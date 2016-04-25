@@ -26,8 +26,10 @@ describe('animated-viewbox', () => {
       <WrappedDummy foo='bar' somethingIsTrue />
     )
 
-    expect(wrapper.prop('foo')).toEqual('bar')
-    expect(wrapper.prop('somethingIsTrue')).toEqual(true)
+    const dummy = wrapper.find(Dummy)
+
+    expect(dummy.prop('foo')).toEqual('bar')
+    expect(dummy.prop('somethingIsTrue')).toEqual(true)
   })
 
   it('should pass the first viewBox prop to the wrapped component without animating', () => {
