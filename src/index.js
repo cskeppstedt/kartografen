@@ -9,6 +9,7 @@ import Scorekeeper from './components/scorekeeper'
 import SkipButton from './components/skipButton'
 import Autocomplete from './components/autocomplete'
 
+import getCountries from './get-countries'
 import countriesConfig from './config/countries.json'
 
 import './index.scss'
@@ -20,7 +21,7 @@ function pickRandom (fromArray) {
 
 const MainView = React.createClass({
   getInitialState () {
-    const countries = countriesConfig.countries
+    const countries = getCountries(countriesConfig.countries)
     const country = pickRandom(countries)
     const currentText = ''
     const showFeedback = false
@@ -134,7 +135,7 @@ const MainView = React.createClass({
           <Scorekeeper {...this.state.score}/>
           <SkipButton clickCallback={this.skipMap} />
         </div>
-        <Karta country={currentCountry} />
+        <Karta id={currentCountry.id} viewBox={currentCountry.viewBox} />
         <Autocomplete text={this.state.currentText} values={this.state.countries} onClick={this.handleOnClick} />
         <Input text={this.state.currentText} onChange={this.handleOnChange}/>
       </div>

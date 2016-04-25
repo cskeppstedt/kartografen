@@ -1,18 +1,20 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
+import withAnimatedViewbox from './animated-viewbox'
 import './karta.scss'
 
 const OPACITY_ACTIVE = '1.0'
 const OPACITY_INACTIVE = '0.25'
 
-export default function Karta ({ country }) {
-  const { id, viewBox } = country
+const viewBoxString = ({ x, y, width, height }) => `${x} ${y} ${width} ${height}`
+
+function Karta ({ id, viewBox }) {
   const opacity = (pathCountryId) => id === pathCountryId ? OPACITY_ACTIVE : OPACITY_INACTIVE
 
   return (
     <div className={'karta ' + id}>
       <div className='svg-container'>
         <div className='svg-wrapper'>
-          <svg xmlns='http://www.w3.org/2000/svg' viewBox={viewBox}>
+          <svg xmlns='http://www.w3.org/2000/svg' viewBox={viewBoxString(viewBox)}>
             <path opacity='1.0' fill-rule='evenodd' clip-rule='evenodd' fill='#68C0E6' d='M0 0h563.804v314.386H0z'/>
             <path opacity={OPACITY_INACTIVE} fill-rule='evenodd' clip-rule='evenodd' fill='#F96' d='M351.66 220.497l.06-.284-.036-.254.184-.05.19.25-.297.474'/>
             <path opacity={OPACITY_INACTIVE} fill-rule='evenodd' clip-rule='evenodd' fill='#EBD7B0' d='M349.05 218.68l.118-.178-.1-.302.117-.16-.143-.308-.17-.018-.238.385.077.2.042.36.148.06.15-.04zm.148.633l.178.018.142.19-.278-.023-.106-.112.064-.072zm1.65.19l.13-.154-.152-.32-.136.13-.243.06.2.1.202.183z'/>
@@ -215,5 +217,16 @@ export default function Karta ({ country }) {
 }
 
 Karta.propTypes = {
-  text: React.PropTypes.string
+  id: PropTypes.string,
+  viewBox: PropTypes.shape({
+    x: PropTypes.number,
+    y: PropTypes.number,
+    width: PropTypes.number,
+    height: PropTypes.number
+  })
 }
+
+Karta.displayName = 'Karta'
+
+export default withAnimatedViewbox(Karta, 1000)
+
