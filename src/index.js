@@ -2,7 +2,7 @@ import 'babel-polyfill'
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+// import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 import Karta from './components/karta'
 import Input from './components/input'
@@ -102,16 +102,7 @@ const MainView = React.createClass({
   render () {
     return (
       <div className='main'>
-        <ReactCSSTransitionGroup
-          transitionName='slider'
-          transitionEnterTimeout={300}
-          transitionLeaveTimeout={300}
-          transitionAppear
-          transitionAppearTimeout={500}>
-          {this.state.showFeedback
-            ? this.renderFeedback()
-            : this.renderCountry()}
-        </ReactCSSTransitionGroup>
+        {this.renderCountry()}
       </div>
     )
   },
@@ -132,7 +123,7 @@ const MainView = React.createClass({
     const currentCountry = this.state.country
 
     return (
-      <div className='karta-wrapper' key={'country' + currentCountry.id}>
+      <div className='karta-wrapper'>
         <div className='score-wrapper'>
           <Scorekeeper {...this.state.score}/>
           <SkipButton clickCallback={this.skipMap} />
@@ -145,4 +136,4 @@ const MainView = React.createClass({
   }
 })
 
-ReactDOM.render(<MainView />, document.getElementById('kartografen'))
+ReactDOM.render(<MainView />, document.getElementById('kartografen')) /*eslint no-undef:0*/
