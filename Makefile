@@ -24,5 +24,5 @@ run:
 	@$(DOCKER) run -e "PORT=8080" -p 8080:8080 --rm -it $(REGISTRY)/$(IMAGE):$(VERSION)
 
 bash:
-	@$(DOCKER) run -e "PORT=8080" --rm -it $(REGISTRY)/$(IMAGE):$(VERSION) bash
+	@$(DOCKER) run -e "PORT=8080" -p 8080:8080 --rm -it $(REGISTRY)/$(IMAGE):$(VERSION) bash
 
