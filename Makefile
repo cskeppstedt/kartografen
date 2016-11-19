@@ -19,3 +19,7 @@ latest:
 push:
 	@$(DOCKER) push $(REGISTRY)/$(IMAGE):$(VERSION)
 	@$(DOCKER) push $(REGISTRY)/$(IMAGE):latest
+
+run:
+	@$(DOCKER) run -p 8080:80 --rm -it $(REGISTRY)/$(IMAGE):$(VERSION)
+
