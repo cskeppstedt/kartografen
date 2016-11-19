@@ -10,7 +10,7 @@ DOCKER=$(shell docker info >/dev/null 2>&1 && echo "docker" || echo "sudo docker
 all: build
 
 build:
-	npm run dist
+	# npm run dist
 	@$(DOCKER) build -t $(REGISTRY)/$(IMAGE):$(VERSION) ./
 
 latest:
@@ -21,5 +21,8 @@ push:
 	@$(DOCKER) push $(REGISTRY)/$(IMAGE):latest
 
 run:
-	@$(DOCKER) run -p 8080:80 --rm -it $(REGISTRY)/$(IMAGE):$(VERSION)
+	@$(DOCKER) run -e "PORT=8080" --rm -it $(REGISTRY)/$(IMAGE):$(VERSION)
+
+bash:
+	@$(DOCKER) run -e "PORT=8080" --rm -it $(REGISTRY)/$(IMAGE):$(VERSION) bash
 
