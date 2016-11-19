@@ -52,13 +52,8 @@ const MainView = React.createClass({
         country: newCountry,
         countries: newCountries,
         oldCountry: country,
-        didSkip: didSkip,
-        showFeedback: true
+        didSkip: didSkip
       })
-
-      setTimeout(() => {
-        this.setState({ showFeedback: false })
-      }, 3000)
     }
   },
 
@@ -98,11 +93,13 @@ const MainView = React.createClass({
     })
     this.nextMap({ didSkip: true })
   },
-
   render () {
     return (
       <div className='main'>
-        {this.renderCountry()}
+        {this.state.showFeedback
+          ? this.renderFeedback()
+          : this.renderCountry()
+        }
       </div>
     )
   },
@@ -121,7 +118,6 @@ const MainView = React.createClass({
 
   renderCountry () {
     const currentCountry = this.state.country
-
     return (
       <div className='karta-wrapper'>
         <div className='score-wrapper'>
