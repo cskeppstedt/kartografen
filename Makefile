@@ -17,7 +17,7 @@ push:
 	@$(DOCKER) push $(IMAGE_NAME)
 
 # nice to have for local development
-run:
+run: build
 	@$(DOCKER) run -e "PORT=8080" -p 8080:8080 --rm -it $(IMAGE_NAME)
 
 bash:
