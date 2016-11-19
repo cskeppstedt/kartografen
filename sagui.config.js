@@ -59,5 +59,11 @@ module.exports = {
    *
    * Will overwrite and extend the default Sagui configuration
    */
-  karmaConfig: undefined
+  karmaConfig: {
+    files: [
+      'node_modules/babel-polyfill/dist/polyfill.js',
+      'src/**/*.spec.*',
+      { pattern: 'src/**/*', watched: true, included: false }
+    ]
+  }
 }

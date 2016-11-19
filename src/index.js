@@ -1,6 +1,8 @@
+import 'babel-polyfill'
+
 import React from 'react'
 import ReactDOM from 'react-dom'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+// import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 import Karta from './components/karta'
 import Input from './components/input'
@@ -9,6 +11,7 @@ import Scorekeeper from './components/scorekeeper'
 import SkipButton from './components/skipButton'
 import Autocomplete from './components/autocomplete'
 
+import getCountries from './get-countries'
 import countriesConfig from './config/countries.json'
 
 import './index.scss'
@@ -20,7 +23,7 @@ function pickRandom (fromArray) {
 
 const MainView = React.createClass({
   getInitialState () {
-    const countries = countriesConfig.countries
+    const countries = getCountries(countriesConfig.countries)
     const country = pickRandom(countries)
     const currentText = ''
     const showFeedback = false
@@ -49,13 +52,8 @@ const MainView = React.createClass({
         country: newCountry,
         countries: newCountries,
         oldCountry: country,
-        didSkip: didSkip,
-        showFeedback: true
+        didSkip: didSkip
       })
-
-      setTimeout(() => {
-        this.setState({ showFeedback: false })
-      }, 3000)
     }
   },
 
@@ -95,20 +93,13 @@ const MainView = React.createClass({
     })
     this.nextMap({ didSkip: true })
   },
-
   render () {
     return (
       <div className='main'>
-        <ReactCSSTransitionGroup
-          transitionName='slider'
-          transitionEnterTimeout={300}
-          transitionLeaveTimeout={300}
-          transitionAppear
-          transitionAppearTimeout={500}>
-          {this.state.showFeedback
-            ? this.renderFeedback()
-            : this.renderCountry()}
-        </ReactCSSTransitionGroup>
+        {this.state.showFeedback
+          ? this.renderFeedback()
+          : this.renderCountry()
+        }
       </div>
     )
   },
@@ -127,14 +118,13 @@ const MainView = React.createClass({
 
   renderCountry () {
     const currentCountry = this.state.country
-
     return (
-      <div className='karta-wrapper' key={'country' + currentCountry.id}>
+      <div className='karta-wrapper'>
         <div className='score-wrapper'>
           <Scorekeeper {...this.state.score}/>
           <SkipButton clickCallback={this.skipMap} />
         </div>
-        <Karta country={currentCountry} />
+        <Karta id={currentCountry.id} viewBox={currentCountry.viewBox} />
         <Autocomplete text={this.state.currentText} values={this.state.countries} onClick={this.handleOnClick} />
         <Input text={this.state.currentText} onChange={this.handleOnChange}/>
       </div>
@@ -142,4 +132,4 @@ const MainView = React.createClass({
   }
 })
 
-ReactDOM.render(<MainView />, document.getElementById('kartografen'))
+ReactDOM.render(<MainView />, document.getElementById('kartografen')) /*eslint no-undef:0*/
